@@ -22,7 +22,12 @@ export const useExpenses = create(
       updateExpense: (id, payload) =>
         set((state) => ({
           expenses: state.expenses.map((item) =>
-            item.id === id ? { ...item, ...payload } : item,
+
+            //It throws away the original item completely. The expense object is replaced entirely by whatever is inside the payload.
+            item.id === id ? { ...payload } : item
+
+            // item.id === id ? { ...item, ...payload } : item
+            //  //It copies the entire original item first, and then overwrites only the fields provided in the payload
           ),
         })),
     }),

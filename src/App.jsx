@@ -11,7 +11,7 @@ const App = () => {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState(null);
-  
+
   // Destructured the correct actions from the Zustand store
   const { expenses, addExpense, deleteExpense, updateExpense } = useExpenses();
 
@@ -74,17 +74,31 @@ const App = () => {
           <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead className="bg-gray-50 text-xs font-semibold uppercase text-gray-700 sticky top-0">
               <tr>
-                <th scope="col" className="px-6 py-4">Name</th>
-                <th scope="col" className="px-6 py-4">Description</th>
-                <th scope="col" className="px-6 py-4">Amount</th>
-                <th scope="col" className="px-6 py-4">Date</th>
-                <th scope="col" className="px-6 py-4">Options</th>
+                <th scope="col" className="px-6 py-4">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-4">
+                  Description
+                </th>
+                <th scope="col" className="px-6 py-4">
+                  Amount
+                </th>
+                <th scope="col" className="px-6 py-4">
+                  Date
+                </th>
+                <th scope="col" className="px-6 py-4">
+                  Options
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 border-t border-gray-200">
               {expenses.map((item) => (
-                <tr key={item.id} className="hover:bg-gray-50"> {/* FIXED: Use unique item.id as key */}
-                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{item.name}</td>
+                <tr key={item.id} className="hover:bg-gray-50">
+                  {" "}
+                  {/* FIXED: Use unique item.id as key */}
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                    {item.name}
+                  </td>
                   <td className="px-6 py-4">{item.description}</td>
                   <td className="px-6 py-4">₹{item.amount}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
@@ -118,13 +132,22 @@ const App = () => {
         </div>
       </div>
 
-      <Modal 
-        open={open} 
-        footer={null} 
+      <Modal
+        open={open}
+        footer={null}
         onCancel={handleClose}
-        title={<h1 className="text-2xl font-semibold">{editId ? "Edit Expense" : "Add Expense"}</h1>}
+        title={
+          <h1 className="text-2xl font-semibold">
+            {editId ? "Edit Expense" : "Add Expense"}
+          </h1>
+        }
       >
-        <Form onFinish={handleFormSubmit} form={form} layout="horizontal" className="mt-4">
+        <Form
+          onFinish={handleFormSubmit}
+          form={form}
+          layout="horizontal"
+          className="mt-4"
+        >
           <Form.Item
             name="name"
             label="Name"
@@ -139,16 +162,21 @@ const App = () => {
           >
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item 
-            name="amount" 
-            label="Amount" 
+          <Form.Item
+            name="amount"
+            label="Amount"
             rules={[{ required: true, message: "Please enter an amount!" }]}
           >
-            <InputNumber className="!w-full" size="large" min={0} precision={2} />
+            <InputNumber
+              className="!w-full"
+              size="large"
+              min={0}
+              precision={2}
+            />
           </Form.Item>
-          <Form.Item 
-            label="Date" 
-            name="date" 
+          <Form.Item
+            label="Date"
+            name="date"
             rules={[{ required: true, message: "Please pick a date!" }]}
           >
             <DatePicker className="!w-full" size="large" format="DD-MM-YYYY" />
